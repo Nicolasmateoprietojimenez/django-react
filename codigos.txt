@@ -33,8 +33,8 @@ $ winpty py manage.py createsuperuser (crear super usuario)
 $ py manage.py makemigrations
 
 
-Usurname: ateo
-Password: la de siempre xd
+Usurname: nicodev
+Password: @Mateo7171 
 
 
 Formularios:
