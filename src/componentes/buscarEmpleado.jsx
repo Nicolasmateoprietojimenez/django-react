@@ -1,9 +1,12 @@
+// src/componentes/buscarEmpleado.jsx
 import React, { useState } from 'react';
 import axiosInstance from '../axiosconfig';
+import { useNavigate } from 'react-router-dom';
 
 function BuscarEmpleado({ onEmployeeFound }) {
   const [documento, setDocumento] = useState('');
   const [error, setError] = useState(null); 
+  const navigate = useNavigate();
 
   const handleSearch = () => {
     if (!documento) {
@@ -16,7 +19,8 @@ function BuscarEmpleado({ onEmployeeFound }) {
         if (response.data) {
           console.log("Empleado encontrado:", response.data);
           onEmployeeFound(response.data); 
-          setError(null);  
+          setError(null);
+          navigate('/empleado-detalle');
         } else {
           setError('Empleado no encontrado');
         }

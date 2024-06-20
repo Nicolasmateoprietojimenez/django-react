@@ -1,49 +1,36 @@
-import React, { useState } from 'react';
+// src/App.jsx
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Soli from '../src/componentes/soli';
-import SeguridadSocial from '../src/componentes/seguridadSocial';
+import Soli from './componentes/soli';
+import SeguridadSocial from './componentes/seguridadSocial';
 import BuscarEmpleado from './componentes/buscarEmpleado';
 import EmpleadoDetalle from './componentes/empleadoDetalle';
 
 function App() {
-  const [employee, setEmployee] = useState(null);
-
-  const handleEmployeeFound = (emp) => {
-    setEmployee(emp);
-  };
+  const [empleado, setEmpleado] = React.useState(null);
 
   return (
     <Router>
-      <div className="App">
-        <header className="App-header">
-          <h1>Aplicación de Deducciones</h1>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Primas</Link>
-              </li>
-              <li>
-                <Link to="/seguridad-social">Seguridad Social</Link>
-              </li>
-              <li>
-                <Link to="/buscar-empleado">Buscar Empleado</Link>
-              </li>
-              <li>
-                <a href="http://localhost:8000/swagger/" target="_blank" rel="noopener noreferrer">
-                  Documentación API
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </header>
-
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Buscar Empleado</Link>
+            </li>
+            <li>
+              <Link to="/soli">Primas</Link>
+            </li>
+            <li>
+              <Link to="/seguridad-social">Seguridad Social</Link>
+            </li>
+          </ul>
+        </nav>
         <Routes>
-          <Route path="/" element={<Soli />} />
+          <Route path="/" element={<BuscarEmpleado onEmployeeFound={setEmpleado} />} />
+          <Route path="/soli" element={<Soli />} />
           <Route path="/seguridad-social" element={<SeguridadSocial />} />
-          <Route path="/buscar-empleado" element={<BuscarEmpleado onEmployeeFound={handleEmployeeFound} />} />
+          <Route path="/empleado-detalle" element={empleado && <EmpleadoDetalle numeroDocumento={empleado.nro_documento} />} />
         </Routes>
-
-        {employee && <EmpleadoDetalle empleado={employee} />}
       </div>
     </Router>
   );
