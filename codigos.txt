@@ -1,3 +1,8 @@
+Usurname: nicodev
+Password: @Mateo7171 
+
+
+
 Codigos depronto para utilizar:
 
 -$ history (ver historial)
@@ -33,8 +38,7 @@ $ winpty py manage.py createsuperuser (crear super usuario)
 $ py manage.py makemigrations
 
 
-Usurname: nicodev
-Password: @Mateo7171 
+
 
 
 Formularios:
