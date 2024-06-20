@@ -1,0 +1,43 @@
+Codigos depronto para utilizar:
+
+-$ history (ver historial)
+
+-$pip list 
+
+-$ pip install virtualenv (instala la herramienta)
+
+-$ python -m venv env (Creación de un Entorno Virtua)
+
+-$ source env/Scripts/activate (Activar el entorno)
+
+-$ deactivate (Desactivar el entorno)
+
+-$ python -m django --version (ver la version de django)
+
+-$ pip install django (para instalar django)
+
+-$ django-admin startproject testadso . (para crear proyecto)
+
+-$ python manage.py help (ayuda de funciones para implementar)
+
+
+
+
+py manage.py runserver
+
+py manage.py startapp usuarios
+
+$ py manage.py migrate (migrar datos)
+$ winpty py manage.py createsuperuser (crear super usuario)
+$ py manage.py makemigrations
+
+
+Usurname: ateo
+Password: la de siempre xd
+
+
+Formularios:
+
+Se crea un archivo form
+
+se crea una clase de formulario, y una inner clase "Meta" que tendra el modelo a usar y los campos de dicho modelo
