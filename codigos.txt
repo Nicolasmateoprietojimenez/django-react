@@ -1,6 +1,9 @@
 Usurname: nicodev
 Password: @Mateo7171 
 
+En caso de que no funcione el npm start ejecutar este comando a nivel local:
+npm install react-scripts --save
+
 
 
 Codigos depronto para utilizar:

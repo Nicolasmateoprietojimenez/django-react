@@ -76,7 +76,7 @@ const EmpleadoList = () => {
                             <Link to={`/seguridad/${empleado.nro_documento}`}>Obtener</Link>
                             </td>
                             <td>
-                            <Link to={`/solicitarprimaq`}>Obtener</Link>
+                            <Link to={`/solicitarprima`}>Obtener</Link>
 
                             </td>
                         </tr>
