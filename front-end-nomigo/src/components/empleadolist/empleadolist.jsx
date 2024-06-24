@@ -11,7 +11,7 @@ const EmpleadoList = () => {
 
     const fetchEmpleados = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:8000/empleados/empleadosrest/');
+            const response = await fetch('http://127.0.0.1:8000/empleadosrest/');
             if (!response.ok) {
                 throw new Error('Failed to fetch data');
             }
@@ -24,7 +24,7 @@ const EmpleadoList = () => {
 
     const handleEliminarRegistro = async (nro_documento) => {
         try {
-            const response = await fetch(`http://127.0.0.1:8000/empleados/empleadosrest/${nro_documento}`, {
+            const response = await fetch(`http://127.0.0.1:8000/empleadosrest/${nro_documento}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {

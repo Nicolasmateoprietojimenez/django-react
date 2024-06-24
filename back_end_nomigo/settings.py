@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'deducciones.apps.DeduccionesConfig',
     'devengos.apps.DevengosConfig',
-    'gestion_usuarios.apps.GestionUsuariosConfig',
+    'gestion_empleados.apps.GestionEmpleadosConfig',
     'rest_framework',
     'corsheaders',
 ]

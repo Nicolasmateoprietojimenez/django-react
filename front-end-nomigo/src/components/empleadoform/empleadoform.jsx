@@ -224,7 +224,7 @@ const FormularioEmpleado = () => {
           <button type="submit">Crear Empleado</button>
         </form>
       )}
-      <Link to="/empleadolist">Registra otro empleado</Link>
+      {/* <Link to="/empleadolist">Registra otro empleado</Link> */}
     </div>
   );
 };

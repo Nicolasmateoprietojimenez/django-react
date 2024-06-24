@@ -23,7 +23,7 @@ class TipoHoraRecargo(models.Model):
 
 class HoraExtra(models.Model):
 
-    nro_documento = models.ForeignKey('gestion_usuarios.Empleado', on_delete=models.CASCADE, null=True)
+    nro_documento = models.ForeignKey('gestion_empleados.Empleado', on_delete=models.CASCADE, null=True)
 
     fecha_hora = models.DateTimeField(help_text="Fecha y hora de la hora extra")
 
