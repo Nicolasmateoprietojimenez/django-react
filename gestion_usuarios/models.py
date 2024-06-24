@@ -60,17 +60,24 @@ class Empleado(models.Model):
     # Campos específicos de los roles operador y lector
     
     direccion = models.CharField(max_length=255, blank=True, null=True)
-    documento_identidad = models.FileField(upload_to='documentos/', blank=True, null=True)
     estado_civil = models.CharField(max_length=20, blank=True, null=True)
     
     # Relación con el modelo NivelRiesgo de deducciones
-    nivel_riesgo = models.ForeignKey(
-        'deducciones.NivelRiesgo',  # Usamos comillas para una referencia indirecta
-        on_delete=models.CASCADE,
-        null=True,
-        related_name='empleados_gestion'  # Related name único para evitar conflictos
-    )
+    NIVELES_RIESGO = [
+        ('0.522%', 'Riesgo I: 0.522%'),
+        ('1.044%', 'Riesgo II: 1.044%'),
+        ('2.436%', 'Riesgo III: 2.436%'),
+        ('4.350%', 'Riesgo IV: 4.350%'),
+        ('6.960%', 'Riesgo V: 6.960%'),
+    ]
     
+    nivel_riesgo = models.CharField(
+        max_length=20,
+        choices=NIVELES_RIESGO,
+        null=True,
+        blank=True,
+        help_text='Nivel de riesgo y porcentaje'
+    )
     def __str__(self):
         return f"{self.nro_documento}"
 

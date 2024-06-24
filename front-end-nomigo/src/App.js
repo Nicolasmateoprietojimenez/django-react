@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import EmpleadoForm from './components/empleadoform/empleadoform';
+import EmpleadoList from './components/empleadolist/empleadolist';
+import EmpleadoPut from './components/empleadoput/empleadoput';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<EmpleadoList />} />
+          <Route path="/empleadoform" element={<EmpleadoForm />} />
+          <Route path="/empleadolist" element={<EmpleadoList />} />
+          <Route path="/empleadoput/:nro_documento" element={<EmpleadoPut/>} />
+        </Routes>
+      </Router>
     </div>
   );
 }
