@@ -53,6 +53,8 @@ const EmpleadoList = () => {
                         <th>Fecha de Ingreso</th>
                         <th>Salario base</th>
                         <th>Acciones</th>
+                        <th>Deducciones</th>
+                        <th>Prima</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -69,6 +71,13 @@ const EmpleadoList = () => {
                             <td>
                                 <button onClick={() => handleEliminarRegistro(empleado.nro_documento)}>Eliminar</button>
                                 <Link to={`/empleadoput/${empleado.nro_documento}`}>Editar</Link>
+                            </td>
+                            <td>
+                            <Link to={`/seguridad/${empleado.nro_documento}`}>Obtener</Link>
+                            </td>
+                            <td>
+                            <Link to={`/solicitarprima`}>Obtener</Link>
+
                             </td>
                         </tr>
                     ))}

@@ -41,7 +41,7 @@ const FormularioEmpleado = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:8000/empleados/empleadosrest/', formEmpleado, {
+      const response = await axios.post('http://127.0.0.1:8000/empleadosrest/', formEmpleado, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -224,7 +224,7 @@ const FormularioEmpleado = () => {
           <button type="submit">Crear Empleado</button>
         </form>
       )}
-      {/* <Link to="/empleadolist">Registra otro empleado</Link> */}
+      <Link to="/empleadolist">Registra otro empleado</Link>
     </div>
   );
 };

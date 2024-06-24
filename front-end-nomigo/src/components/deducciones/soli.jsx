@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../../axiosconfig';
 
 function Soli() {
     const [primas, setPrimas] = useState([]);
@@ -14,10 +13,17 @@ function Soli() {
     }, []);
 
     const fetchPrimas = () => {
-        axiosInstance.get('primas/')
+        fetch('http://127.0.0.1:8000/api/primas/')
             .then(response => {
-                setPrimas(response.data);
+                if (!response.ok) {
+                    throw new Error('Hubo un error al obtener las primas');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setPrimas(data);
                 setLoading(false);
+                setError(null);
             })
             .catch(error => {
                 console.error('Hubo un error al obtener las primas:', error);
@@ -45,17 +51,29 @@ function Soli() {
             return;
         }
 
-        axiosInstance.post(`primas/${empleado.id}/calcular_prima/`, {
-            dias_trabajados: diasTrabajados
+        fetch(`http://127.0.0.1:8000/api/primas/${empleado.id}/calcular_prima/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                dias_trabajados: diasTrabajados
+            }),
         })
-        .then(response => {
-            const prima = response.data.prima_calculada;
-            setPrimaCalculada(prima.toFixed(2));  // Redondea a dos decimales
-        })
-        .catch(error => {
-            console.error('Error al calcular la prima:', error);
-            alert('Error al calcular la prima');
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al calcular la prima');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const prima = data.prima_calculada;
+                setPrimaCalculada(prima.toFixed(2));  // Redondea a dos decimales
+            })
+            .catch(error => {
+                console.error('Error al calcular la prima:', error);
+                alert('Error al calcular la prima');
+            });
     };
 
     if (loading) {

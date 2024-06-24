@@ -1,64 +1,48 @@
-// src/components/EmpleadoDetalle.js
 import React, { useEffect, useState } from 'react';
-import axiosInstance from '../../axiosconfig';
+import { useParams } from 'react-router-dom';
 
-function EmpleadoDetalle({ numeroDocumento }) {
+function EmpleadoDetalle() {
   const [empleado, setEmpleado] = useState(null);
+  const { nro_documento } = useParams();
   const [seguridadSocial, setSeguridadSocial] = useState({});
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (numeroDocumento) {
-      axiosInstance.get(`empleados/${numeroDocumento}/`)
-        .then(response => {
-          if (response.data) {
-            setEmpleado(response.data);
-            fetchSeguridadSocial(response.data.nro_documento);
-            setError(null);
-          } else {
-            setError('Empleado no encontrado');
-            setEmpleado(null);
-            setSeguridadSocial({});
-          }
-        })
-        .catch(error => {
-          console.error('Error al obtener empleado:', error);
-          if (error.response && error.response.status === 404) {
-            setError('Empleado no encontrado');
-          } else {
-            setError('Error al obtener empleado');
-          }
-          setEmpleado(null);
-          setSeguridadSocial({});
-        });
-    } else {
-      setError('No se ha ingresado ningún número de documento');
-      setEmpleado(null);
+    const fetchEmpleado = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:8000/api/empleados/${nro_documento}/`);
+        if (!response.ok) {
+          throw new Error('Error al obtener empleado');
+        }
+        const data = await response.json();
+        setEmpleado(data);
+        // Llamar a fetchSeguridadSocial solo después de haber establecido empleado
+        fetchSeguridadSocial(data.nro_documento);
+      } catch (error) {
+        console.error('Error al obtener empleado:', error);
+      }
+    };
+
+    if (nro_documento) {
+      fetchEmpleado();
+    }
+  }, [nro_documento]);
+
+  const fetchSeguridadSocial = async (doc) => {
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/api/seguridad_social/${doc}/calcular_seguridad_social/`);
+      if (!response.ok) {
+        throw new Error('Error al obtener seguridad social');
+      }
+      const data = await response.json();
+      setSeguridadSocial(data);
+    } catch (error) {
+      console.error('Error al obtener seguridad social:', error);
       setSeguridadSocial({});
     }
-  }, [numeroDocumento]);
-
-  const fetchSeguridadSocial = (doc) => {
-    axiosInstance.get(`seguridad_social/${doc}/calcular_seguridad_social/`)
-      .then(response => {
-        setSeguridadSocial(response.data);
-      })
-      .catch(() => {
-        console.error('Error al obtener seguridad social');
-        setSeguridadSocial({});
-      });
   };
 
-  if (!numeroDocumento) {
-    return <div>No se ha ingresado ningún número de documento</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
   if (!empleado) {
-    return <div>Cargando...</div>;
+    return null;
   }
 
   return (
@@ -70,11 +54,11 @@ function EmpleadoDetalle({ numeroDocumento }) {
       <p>Salario: {empleado.salario_base}</p>
       <p>Tipo de Empleado: {empleado.tipo_empleado}</p>
       <p>Nivel de Riesgo: {empleado.nivel_riesgo}</p>
+
       <h3>Seguridad Social</h3>
       <p>Salud Descuento: {seguridadSocial.salud_descuento}</p>
       <p>Pensión Descuento: {seguridadSocial.pension_descuento}</p>
       <p>Salario Final: {seguridadSocial.salario_final}</p>
-
     </div>
   );
 }

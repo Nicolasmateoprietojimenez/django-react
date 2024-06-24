@@ -1,17 +1,19 @@
 // seguridadSocial.jsx
 
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../../axiosconfig'; // Ajusta la ruta según la ubicación real
+import axiosInstance from '../../axiosconfig';
+import { useParams } from 'react-router-dom';
 
 function SeguridadSocial() {
   const [empleados, setEmpleados] = useState([]);
+  const { nro_documento } = useParams();
 
   useEffect(() => {
     fetchEmpleados();
   }, []);
 
   const fetchEmpleados = () => {
-    axiosInstance.get('empleados/')
+    axiosInstance.get(`empleados/${nro_documento}/`)
       .then(response => {
         setEmpleados(response.data);
       })

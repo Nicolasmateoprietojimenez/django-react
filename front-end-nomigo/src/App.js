@@ -2,7 +2,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import EmpleadoForm from './components/empleadoform/empleadoform';
 import EmpleadoList from './components/empleadolist/empleadolist';
 import EmpleadoPut from './components/empleadoput/empleadoput';
-import BuscarEmpleado from './components/deducciones/buscarEmpleado';
+import EmpleadoDetalle from './components/deducciones/empleadoDetalle';
+import Soli from './components/deducciones/soli';
+// import BuscarEmpleado from './components/deducciones/buscarEmpleado';
+// import SeguridadSocial from './components/deducciones/seguridadSocial';
 
 function App() {
   return (
@@ -13,7 +16,9 @@ function App() {
           <Route path="/empleadoform" element={<EmpleadoForm />} />
           <Route path="/empleadolist" element={<EmpleadoList />} />
           <Route path="/empleadoput/:nro_documento" element={<EmpleadoPut/>} />
-          <Route path="/buscarEmpleado" element={<BuscarEmpleado/>} />
+          <Route path="/seguridad/:nro_documento" element={<EmpleadoDetalle/>} />
+          <Route path="/solicitarprima" element={<Soli />} />
+
         </Routes>
       </Router>
     </div>
