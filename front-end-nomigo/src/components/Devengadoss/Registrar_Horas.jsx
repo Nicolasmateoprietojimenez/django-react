@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Registrar_Horas = () => {
   const [documento, setDocumento] = useState('');
@@ -84,9 +85,11 @@ const Registrar_Horas = () => {
           placeholder="Valor"
           onChange={(e) => setValor(e.target.value)}
         />
+        
         <button type="submit">Crear</button>
         <div className="message">{message ? <p>{message}</p> : null}</div>
       </form>
+      <Link to="/ListarHoras">Volver</Link>  
     </>
   );
 };
